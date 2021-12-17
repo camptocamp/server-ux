@@ -341,6 +341,15 @@ class TierValidation(models.AbstractModel):
                 allowed_field_names.append(fld_data["string"])
         return allowed_field_names, not_allowed_field_names
 
+    def _check_tier_state_transition(self, vals):
+        """
+        Check we are in origin state and not destination state
+        """
+        self.ensure_one()
+        return getattr(self, self._state_field) in self._state_from and not vals.get(
+            self._state_field
+        ) in (self._state_to + [self._cancel_state])
+
     def write(self, vals):
         self._tier_validation_check_state_on_write(vals)
         self._tier_validation_check_write_allowed(vals)
