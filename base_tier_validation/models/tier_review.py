@@ -23,6 +23,14 @@ class TierReview(models.Model):
     )
     model = fields.Char(string="Related Document Model", index=True)
     res_id = fields.Integer(string="Related Document ID", index=True)
+    record_id = fields.Reference(
+        selection=lambda self: [
+            (m.model, m.name) for m in self.env["ir.model"].search([])
+        ],
+        compute="_compute_record_id",
+        store=True,
+        index=True,
+    )
     definition_id = fields.Many2one(comodel_name="tier.definition")
     company_id = fields.Many2one(
         related="definition_id.company_id",
@@ -87,6 +95,11 @@ class TierReview(models.Model):
             reviewed_date_utc = pytz.timezone("UTC").localize(review.reviewed_date)
             reviewed_date_tz = reviewed_date_utc.astimezone(pytz.timezone(timezone))
             review.reviewed_formated_date = reviewed_date_tz.replace(tzinfo=None)
+
+    @api.depends("model", "res_id")
+    def _compute_record_id(self):
+        for record in self:
+            record.record_id = "%s,%s" % (record.model, record.res_id)
 
     @api.depends("definition_id.approve_sequence")
     def _compute_can_review(self):

@@ -395,6 +395,7 @@ class TierValidation(models.AbstractModel):
                 if rec.need_validation:
                     # try to validate operation
                     reviews = rec.request_validation()
+                    validated_reviews |= reviews
                     rec._validate_tier(reviews)
                     if not self._calc_reviews_validated(reviews):
                         pending_reviews = reviews.filtered(
@@ -476,6 +477,13 @@ class TierValidation(models.AbstractModel):
         for rec in self:
             if rec._allow_to_remove_reviews(vals):
                 rec.mapped("review_ids").unlink()
+
+    def _post_tier_validation(self, reviews):
+        """
+        This is a hook to add some actions after the reviews
+        """
+        return True
+                
 
     def _allow_to_remove_reviews(self, values):
         """Method for deciding whether the elimination of revisions is necessary."""
