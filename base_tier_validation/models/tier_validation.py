@@ -390,7 +390,7 @@ class TierValidation(models.AbstractModel):
                     # try to validate operation
                     reviews = rec.request_validation()
                     rec._validate_tier(reviews)
-                    if not new_self._calc_reviews_validated(reviews):
+                    if not self._calc_reviews_validated(reviews):
                         pending_reviews = reviews.filtered(
                             lambda r: r.status == "pending"
                         ).mapped("name")
