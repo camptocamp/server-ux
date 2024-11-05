@@ -3,6 +3,9 @@
     "OCA/server-ux#778": "Already ported",
     "OCA/server-ux#813": "Already ported",
     "OCA/server-ux#830": "Already ported",
-    "OCA/server-ux#848": "Already ported"
+    "OCA/server-ux#848": "Already ported",
+    "orphaned_commits": "(auto) Nothing to port from PR #",
+    "248": "(auto) Nothing to port from PR #248",
+    "431": "(auto) Nothing to port from PR #431"
   }
 }
