@@ -1,6 +1,6 @@
 # Copyright 2020 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class TierValidation(models.AbstractModel):
@@ -42,7 +42,7 @@ class TierValidation(models.AbstractModel):
         )
         wizard = self.env.ref("base_tier_validation_forward.view_forward_wizard")
         return {
-            "name": _("Forward"),
+            "name": self.env._("Forward"),
             "type": "ir.actions.act_window",
             "view_mode": "form",
             "res_model": "tier.validation.forward.wizard",
@@ -88,7 +88,7 @@ class TierValidation(models.AbstractModel):
         )
         if has_comment:
             comment = has_comment.mapped("comment")[0]
-            return _("A review was forwarded from %(user_name)s %(comment)s") % (
-                {"user_name": self.env.user.name, "comment": comment}
-            )
-        return _("A review was forwarded by %s.") % (self.env.user.name)
+            return self.env._(
+                "A review was forwarded from %(user_name)s %(comment)s"
+            ) % ({"user_name": self.env.user.name, "comment": comment})
+        return self.env._("A review was forwarded by %s.") % (self.env.user.name)
