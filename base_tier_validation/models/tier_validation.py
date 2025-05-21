@@ -861,25 +861,20 @@ class TierValidation(models.AbstractModel):
                 node.append(new_node)
                 _merge_view_fields(all_models, new_models)
             excepted_fields = self._get_all_validation_exceptions()
-            readonly_fields = (
-                self.env["ir.model.fields"]
-                .sudo()
-                .search([("model", "=", self._name), ("readonly", "=", True)])
-                .mapped("name")
-            )
+            all_fields = self.fields_get(attributes=("readonly",))
             for node in doc.xpath("//field[@name][not(ancestor::field)]"):
-                if node.attrib.get("name") in excepted_fields:
-                    continue
-                if node.attrib.get("name") in readonly_fields and not node.attrib.get(
-                    "readonly"
-                ):
-                    # Readonly field with readonly not set become editable
-                    # Happens for computed fields
+                field_name = node.attrib.get("name")
+                if field_name in excepted_fields:
                     continue
                 new_r_modifier = self._get_tier_validation_readonly_domain()
                 old_r_modifier = node.attrib.get("readonly")
                 if old_r_modifier:
                     new_r_modifier = f"({old_r_modifier}) or ({new_r_modifier})"
+                elif all_fields.get(field_name, {}).get("readonly"):
+                    # don't set dynamic readonly attribute for fields
+                    # marked readonly in the ORM (ie computed fields)
+                    # if the view doesn't set one
+                    continue
                 node.attrib["readonly"] = new_r_modifier
             res["arch"] = etree.tostring(doc)
             res["models"] = frozendict(all_models)
