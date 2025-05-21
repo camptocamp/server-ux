@@ -863,6 +863,7 @@ class TierValidation(models.AbstractModel):
             excepted_fields = self._get_all_validation_exceptions()
             readonly_fields = (
                 self.env["ir.model.fields"]
+                .sudo()
                 .search([("model", "=", self._name), ("readonly", "=", True)])
                 .mapped("name")
             )
