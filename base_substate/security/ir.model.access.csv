@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_base_substate_type,access_base_substate_type,model_base_substate_type,base.group_user,1,1,1,1
+access_target_state_value,access_target_state_value,model_target_state_value,base.group_user,1,1,1,1
+access_base_substate,access_base_substate,model_base_substate,base.group_user,1,1,1,1
+access_base_substate_test_sale,access_base_substate_test_sale,model_base_substate_test_sale,base.group_user,1,1,1,1
+access_base_substate_test_sale_line,access_base_substate_test_sale_line,model_base_substate_test_sale_line,base.group_user,1,1,1,1
