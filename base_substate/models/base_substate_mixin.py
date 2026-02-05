@@ -13,6 +13,8 @@ class BaseSubstateMixin(models.AbstractModel):
 
     @api.constrains("substate_id", _state_field)
     def check_substate_id_value(self):
+        if self.env.context.get("skip_substate_while_state_field_computation"):
+            return
         rec_states = dict(self._fields[self._state_field].selection)
         for rec in self:
             target_state = rec.substate_id.target_state_value_id.target_state_value
@@ -85,9 +87,12 @@ class BaseSubstateMixin(models.AbstractModel):
                     )
                 )
 
-    def _update_before_write_create(self, values):
+    def _get_state_field(self):
         substate_type = self._get_substate_type()
-        state_field = substate_type.target_state_field
+        return substate_type.target_state_field
+
+    def _update_before_write_create(self, values):
+        state_field = self._get_state_field()
         if values.get(state_field) and not values.get("substate_id"):
             state_val = values.get(state_field)
             values["substate_id"] = self._get_default_substate_id(state_val)
@@ -114,4 +119,18 @@ class BaseSubstateMixin(models.AbstractModel):
         for vals in vals_list:
             vals = self._update_before_write_create(vals)
         res = super().create(vals_list)
+        return res
+
+    def _compute_field_value(self, field):
+        # OVERRIDE: if ``_state_field`` is computed, it does not go through
+        # write method, so we need to set substate in _compute_field_value
+        state_field = self._get_state_field()
+        former_value = getattr(self, state_field)
+        res = super(
+            BaseSubstateMixin,
+            self.with_context(skip_substate_while_state_field_computation=True),
+        )._compute_field_value(field)
+        new_value = getattr(self, state_field)
+        if field.name == state_field and former_value != new_value:
+            self.substate_id = self._get_default_substate_id(new_value)
         return res
