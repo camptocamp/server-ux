@@ -85,20 +85,20 @@ Usage
 - *Go for Mass Editing*: select the records which you want to modify and
   click on *Action* to open mass editing popup.
 
-|image|
+|mass editing item list|
 
 - Select *Set / Remove* action and write down the value to set or remove
   the value for the given field.
 
-|image1|
+|mass editing wizard|
 
 - This way you can set / remove the values of the fields.
 
-|image2|
+|mass editing item result|
 
-.. |image| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree.png
-.. |image1| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-wizard_form.png
-.. |image2| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree-result.png
+.. |mass editing item list| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree.png
+.. |mass editing wizard| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-wizard_form.png
+.. |mass editing item result| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree-result.png
 
 Known issues / Roadmap
 ======================

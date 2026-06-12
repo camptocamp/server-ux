@@ -221,7 +221,7 @@ class MassEditingWizard(models.TransientModel):
                                 )
                                 oe = Exception(sql_error_message)
                             raise UserError(
-                                _(
+                                self.env._(
                                     'Failed to process the %(model_name)s  "%(name)s" '
                                     "[id: %(id)s]:\n\n%(ue)s",
                                     model_name=server_action.model_id.name,
