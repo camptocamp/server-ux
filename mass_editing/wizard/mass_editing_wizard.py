@@ -6,7 +6,7 @@ import logging
 from lxml import etree
 from psycopg2 import IntegrityError
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import (
     AccessDenied,
     AccessError,
@@ -47,25 +47,22 @@ class MassEditingWizard(models.TransientModel):
         operation_description_warning = False
         operation_description_danger = False
         if len(active_ids) == len(original_active_ids):
-            operation_description_info = _(
-                "The treatment will be processed on the %(amount)d selected record(s)."
-            ) % {
-                "amount": len(active_ids),
-            }
+            operation_description_info = self.env._(
+                "The treatment will be processed on the %(amount)d selected record(s).",
+                amount=len(active_ids),
+            )
         elif len(original_active_ids):
-            operation_description_warning = _(
-                "You have selected %(origin_amount)d record(s) that can not be processed.\n"
-                "Only %(amount)d record(s) will be processed."
-            ) % {
-                "origin_amount": len(original_active_ids) - len(active_ids),
-                "amount": len(active_ids),
-            }
+            operation_description_warning = self.env._(
+                "You have selected %(origin_amount)d record(s) that can not be "
+                "processed.\nOnly %(amount)d record(s) will be processed.",
+                origin_amount=len(original_active_ids) - len(active_ids),
+                amount=len(active_ids),
+            )
         else:
-            operation_description_danger = _(
-                "None of the %(amount)d record(s) you have selected can be processed."
-            ) % {
-                "amount": len(active_ids),
-            }
+            operation_description_danger = self.env._(
+                "None of the %(amount)d record(s) you have selected can be processed.",
+                amount=len(active_ids),
+            )
         # Set values
         res.update(
             {
@@ -85,12 +82,12 @@ class MassEditingWizard(models.TransientModel):
         # Add "selection field (set / add / remove / remove_m2m)
         if field.ttype == "many2many":
             selection = [
-                ("set", _("Set")),
-                ("remove_m2m", _("Remove")),
-                ("add", _("Add")),
+                ("set", self.env._("Set")),
+                ("remove_m2m", self.env._("Remove")),
+                ("add", self.env._("Add")),
             ]
         else:
-            selection = [("set", _("Set")), ("remove", _("Remove"))]
+            selection = [("set", self.env._("Set")), ("remove", self.env._("Remove"))]
         result["selection__" + field.name] = {
             "type": "selection",
             "string": field_info["string"],
@@ -184,16 +181,8 @@ class MassEditingWizard(models.TransientModel):
                     elif val == "remove":
                         values.update({split_key: False})
 
-                        # If field to remove is translatable,
-                        # its translations have to be removed
-                        model_field = IrModelFields.search(
-                            [
-                                ("model", "=", server_action.model_id.model),
-                                ("name", "=", split_key),
-                            ]
-                        )
                         # ir.translation is no longer a public model in recent Odoo;
-                        # clearing the field value is enough for the migrated wizard path.
+                        # clearing the field value is enough for this wizard path.
 
                     elif val == "remove_m2m":
                         m2m_list = []

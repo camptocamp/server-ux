@@ -3,7 +3,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 MAGIC_FIELDS = models.MAGIC_COLUMNS + [models.BaseModel.CONCURRENCY_CHECK_FIELD]
@@ -28,14 +28,13 @@ class MassEditingLine(models.Model):
     field_id = fields.Many2one(
         "ir.model.fields",
         string="Field",
-        domain="""
+        domain=f"""
             [
-                ("name", "not in", %s),
+                ("name", "not in", {MAGIC_FIELDS!s}),
                 ("ttype", "not in", ["reference", "function"]),
                 ("model_id", "=", model_id),
             ]
-        """
-        % str(MAGIC_FIELDS),
+        """,
         ondelete="cascade",
         required=True,
     )
@@ -53,7 +52,7 @@ class MassEditingLine(models.Model):
         """Check that all fields belong to the action model"""
         if any(rec.field_id.model_id != rec.server_action_id.model_id for rec in self):
             raise ValidationError(
-                _("Mass edit fields should belong to the server action model.")
+                self.env._("Mass edit fields should belong to the server action model.")
             )
 
     @api.onchange("field_id")
