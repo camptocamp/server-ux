@@ -168,7 +168,6 @@ class MassEditingWizard(models.TransientModel):
         active_ids = self.env.context.get("active_ids", [])
         if server_action and active_ids:
             TargetModel = self.env[server_action.model_id.model]
-            IrModelFields = self.env["ir.model.fields"].sudo()
             write_record_by_record = vals.pop("write_record_by_record", False)
             logging.warning("write_record_by_record: %s", write_record_by_record)
             values = {}
