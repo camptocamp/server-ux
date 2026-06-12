@@ -152,7 +152,7 @@ class TestMassEditing(common.TransactionCase):
         arch = result.get("arch", "")
         self.assertTrue(
             "selection__email" not in arch,
-            "Fields view get must return architecture w/o fields" "created dynamicaly",
+            "Fields view get must return architecture w/o fieldscreated dynamicaly",
         )
 
         result = self.MassEditingWizard.with_context(
@@ -162,7 +162,7 @@ class TestMassEditing(common.TransactionCase):
         arch = result.get("arch", "")
         self.assertTrue(
             "selection__email" in arch,
-            "Fields view get must return architecture with fields" "created dynamicaly",
+            "Fields view get must return architecture with fieldscreated dynamicaly",
         )
 
     def test_wzd_clean_check_company_field_domain(self):
@@ -251,7 +251,7 @@ class TestMassEditing(common.TransactionCase):
         self.assertEqual(
             len(translation_ids),
             1,
-            "Translation for Partner Title's Abbreviation " "was not loaded properly.",
+            "Translation for Partner Title's Abbreviation was not loaded properly.",
         )
         # Removing partner title with mass edit action
         vals = {"selection__shortcut": "remove"}
@@ -268,7 +268,7 @@ class TestMassEditing(common.TransactionCase):
         self.assertEqual(
             len(translation_ids),
             0,
-            "Translation for Partner Title's Abbreviation " "was not removed properly.",
+            "Translation for Partner Title's Abbreviation was not removed properly.",
         )
 
     def test_mass_edit_email(self):

@@ -213,7 +213,6 @@ class MassEditingWizard(models.TransientModel):
             if values:
                 target_records = TargetModel.browse(active_ids)
                 if write_record_by_record:
-
                     for target_record in target_records:
                         try:
                             target_record.write(values)

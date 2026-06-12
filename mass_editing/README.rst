@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ============
 Mass Editing
 ============
@@ -13,39 +17,40 @@ Mass Editing
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fserver--ux-lightgray.png?logo=github
-    :target: https://github.com/OCA/server-ux/tree/15.0/mass_editing
+    :target: https://github.com/OCA/server-ux/tree/19.0/mass_editing
     :alt: OCA/server-ux
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/server-ux-15-0/server-ux-15-0-mass_editing
+    :target: https://translation.odoo-community.org/projects/server-ux-19-0/server-ux-19-0-mass_editing
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/server-ux&target_branch=15.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/server-ux&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module provides the following features:
 
-* You can add, update or remove the values of more than one records on the fly at the same time.
-
-* You can configure mass editing for any Odoo model.
+- You can add, update or remove the values of more than one records on
+  the fly at the same time.
+- You can configure mass editing for any Odoo model.
 
 **Difference between the Odoo 13.0 CE Feature**
 
-Since Odoo V13, a limited "mass Editing feature" is available in Odoo CE.
+Since Odoo V13, a limited "mass Editing feature" is available in Odoo
+CE.
 
-This module provides the following extra features that are not in the Core
-for the time being:
+This module provides the following extra features that are not in the
+Core for the time being:
 
-* Possibility to mass edit many fields in a single action
-* Possibility to add a group to limit the usage of this function to given
-  people
-* Possibility to filter the items the user can mass update
-* Possibility to mass edit any fields with any widget. (For exemple
+- Possibility to mass edit many fields in a single action
+- Possibility to add a group to limit the usage of this function to
+  given people
+- Possibility to filter the items the user can mass update
+- Possibility to mass edit any fields with any widget. (For exemple
   color fields, image fields, etc...)
 
 **Table of contents**
@@ -56,40 +61,44 @@ for the time being:
 Configuration
 =============
 
-* Go to *Settings / Technical / Actions / Server Actions* and configure the object and fields for Mass Editing.
+- Go to *Settings / Technical / Actions / Server Actions* and configure
+  the object and fields for Mass Editing.
+- Select the object and add the fields of that object on which you want
+  to apply mass editing.
 
-* Select the object and add the fields of that object on which you want to apply mass editing.
+|image|
 
-.. image:: https://raw.githubusercontent.com/OCA/server-ux/15.0/mass_editing/static/description/mass_editing_form.png
-   :width: 70%
-
-* *Add Action*: Click on *Create Contextual Action* to add mass editing in *Action* menu.
-
+- *Add Action*: Click on *Create Contextual Action* to add mass editing
+  in *Action* menu.
 
 **Options**
 
-* You can add an extra message that will be displayed in the wizard.
+- You can add an extra message that will be displayed in the wizard.
+- This module plays nicely with server_action_domain, allowing you to
+  limit the mass editing action with a domain.
 
-* This module plays nicely with `server_action_domain`, allowing you to limit
-  the mass editing action with a domain.
+.. |image| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing_form.png
 
 Usage
 =====
 
-* *Go for Mass Editing*: select the records which you want to modify and click on *Action* to open mass editing popup.
+- *Go for Mass Editing*: select the records which you want to modify and
+  click on *Action* to open mass editing popup.
 
-.. image:: https://raw.githubusercontent.com/OCA/server-ux/15.0/mass_editing/static/description/mass_editing-item_tree.png
-   :width: 70%
+|image|
 
-* Select *Set / Remove* action and write down the value to set or remove the value for the given field.
+- Select *Set / Remove* action and write down the value to set or remove
+  the value for the given field.
 
-.. image:: https://raw.githubusercontent.com/OCA/server-ux/15.0/mass_editing/static/description/mass_editing-wizard_form.png
-   :width: 70%
+|image1|
 
-* This way you can set / remove the values of the fields.
+- This way you can set / remove the values of the fields.
 
-.. image:: https://raw.githubusercontent.com/OCA/server-ux/15.0/mass_editing/static/description/mass_editing-item_tree-result.png
-   :width: 70%
+|image2|
+
+.. |image| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-wizard_form.png
+.. |image2| image:: https://raw.githubusercontent.com/OCA/server-ux/19.0/mass_editing/static/description/mass_editing-item_tree-result.png
 
 Known issues / Roadmap
 ======================
@@ -102,7 +111,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/server-ux/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/server-ux/issues/new?body=module:%20mass_editing%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/server-ux/issues/new?body=module:%20mass_editing%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -110,7 +119,7 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Serpent Consulting Services Pvt. Ltd.
 * Tecnativa
@@ -118,26 +127,26 @@ Authors
 * Iván Todorovich
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Oihane Crucelaegui <oihanecrucelaegi@gmail.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
-* Jay Vora <jay.vora@serpentcs.com>
-* Juan Negrete <jnegrete@casasalce.com>
-* Raul Martin <raul.martin@braintec-group.com>
-* Aitor Bouzas <aitor.bouzas@adaptivecity.com>
-* Sylvain LE GAL (https://twitter.com/legalsylvain)
-* Iván Todorovich <ivan.todorovich@gmail.com>
+- Oihane Crucelaegui <oihanecrucelaegi@gmail.com>
+- Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+- Jay Vora <jay.vora@serpentcs.com>
+- Juan Negrete <jnegrete@casasalce.com>
+- Raul Martin <raul.martin@braintec-group.com>
+- Aitor Bouzas <aitor.bouzas@adaptivecity.com>
+- Sylvain LE GAL (https://twitter.com/legalsylvain)
+- Iván Todorovich <ivan.todorovich@gmail.com>
+- `Tecnativa <https://www.tecnativa.com>`__
 
-* `Tecnativa <https://www.tecnativa.com>`_
+  - Jairo Llopis
+  - Víctor Martínez
 
-  * Jairo Llopis
-  * Víctor Martínez
-* Tatiana Deribina <tatiana.deribina@spritnit.fi>
-* Hieu, Vo Minh Bao <hieu.vmb@komit-consulting.com>
+- Tatiana Deribina <tatiana.deribina@spritnit.fi>
+- Hieu, Vo Minh Bao <hieu.vmb@komit-consulting.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -149,6 +158,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/server-ux <https://github.com/OCA/server-ux/tree/15.0/mass_editing>`_ project on GitHub.
+This module is part of the `OCA/server-ux <https://github.com/OCA/server-ux/tree/19.0/mass_editing>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
