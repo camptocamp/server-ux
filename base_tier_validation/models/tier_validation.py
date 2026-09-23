@@ -916,7 +916,7 @@ class TierValidation(models.AbstractModel):
                     # if the view doesn't set one
                     continue
                 node.attrib["readonly"] = new_r_modifier
-            res["arch"] = etree.tostring(doc)
+            res["arch"] = etree.tostring(doc, encoding="unicode")
             res["models"] = frozendict(all_models)
         return res
 
